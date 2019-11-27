@@ -1,23 +1,54 @@
-<h1>Selected Restaurant</h1>
-<h2> <%= @restaurant.name %> </h2>
-<br>
-<p> <strong> Address: </strong> <%= @restaurant.address %> </p>
-<p> <strong> Phone number: </strong> <%= @restaurant.phone_number %> </p>
-<p> <strong> Category: </strong> <%= @restaurant.category %> </p>
-<br>
-<p> <% @reviews.each do |review| %> </p>
-<p> <strong> Review </strong> </p>
-<p> Rating: <%= review.rating %> </p>
-<p> Comment: <%= review.content %> </p>
-<br>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-sm-offset-1">
 
-<br>
-<p><strong>Please write a review...</strong></p>
-<%= simple_form_for [@restaurant, @review] do |f| %>
-  <%= f.input :rating, collection: 0..5 %>
-  <%= f.input :content%>
-  <%= f.submit class: 'btn btn-primary' %>
-<% end %>
-<br>
-<%= link_to "See all restaurants", restaurants_path %>
+      <h1><%= @restaurant.name %></h1>
+      <%= link_to "Back to all restaurants", restaurants_path, class: 'btn btn-secondary btn-sm' %>
+      <br><br>
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <th scope="row">Address</th>
+            <td><%= @restaurant.address %></td>
+          </tr>
+          <tr>
+            <th scope="row">Phone Number</th>
+            <td><%= @restaurant.phone_number %></td>
+          </tr>
+          <tr>
+            <th scope="row">Category</th>
+            <td><%= @restaurant.category %></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="list-group">
+        <% @reviews.each do |review| %>
+          <li class="list-group-item">
+            <small>
+              <% count = 0 %>
+              <% 5.times do %>
+                <% if review.rating > count %>
+                  <i class="fas fa-star"></i>
+                <% else %>
+                  <i class="far fa-star"></i>
+                <% end %>
+                <% count += 1 %>
+              <% end %>
+            </small>
+            <p><%= review.content %></p>
+          </li>
+        <% end %>
+      </div>
+      <br>
+      <p><strong>Please write a review...</strong></p>
+
+      <%= simple_form_for [@restaurant, @review] do |f| %>
+        <%= f.input :rating, collection: 0..5 %>
+        <%= f.input :content%>
+        <%= f.submit class: 'btn btn-primary' %>
+      <% end %>
+
+    </div>
+  </div>
+</div>

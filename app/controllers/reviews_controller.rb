@@ -1,9 +1,10 @@
 class ReviewsController < ApplicationController
   before_action :set_restaurant, only: [:new, :create]
 
-  def new
-    @review = Review.new
-  end
+  # Refactored our code and this action no longer needed
+  # def new
+  #   @review = Review.new
+  # end
 
   def create
     @review = Review.new(review_params)

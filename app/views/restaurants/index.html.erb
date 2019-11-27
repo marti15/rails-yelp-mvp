@@ -1,8 +1,16 @@
-<h1>Restaurants Index</h1>
-<br>
-<p><%= link_to '+ add a new restaurant', new_restaurant_path %></p>
-<br>
-<% @restaurants.each do |restaurant| %>
-<h3><%= link_to restaurant.name, restaurant_path(restaurant) %></h3>
-<p> Category - <%= restaurant.category %></p>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+      <h1>All restaurants</h1>
+      <ul class="list-group">
+        <% @restaurants.each do |restaurant| %>
+          <li class="list-group-item">
+            <%= link_to restaurant.name, restaurant_path(restaurant) %>
+<!--               <p> Category - <%= restaurant.category %></p>
+ -->      </li>
+        <% end %>
+      </ul>
+      <%= link_to '+ add a new restaurant', new_restaurant_path, class: 'btn btn-primary' %>
+    </div>
+  </div>
+</div>

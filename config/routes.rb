@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   # post 'restaurants/:restaurant_id/reviews', to: 'reviews#create'
 
   resources :restaurants, only: [:index, :show, :new, :create] do
-    resources :reviews, only: [:new, :create]
+    resources :reviews, only: [:create]
+    # Got rid of :new in only: [:new, :create] after refactoring
   end
 end
